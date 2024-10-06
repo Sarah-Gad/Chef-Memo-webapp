@@ -33,3 +33,8 @@ module.exports.updateUserProfileCtrl = asyncHandler(async (req, res) => {
   }, { new: true }).select('-password');
   res.status(200).json(updatedUser);
 });
+
+module.exports.getUsersCountCtrl = asyncHandler(async (req, res) => {
+  const count = await User.countDocuments();
+  res.status(200).json(count);
+});
