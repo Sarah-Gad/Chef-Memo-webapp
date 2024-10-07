@@ -38,3 +38,10 @@ module.exports.getUsersCountCtrl = asyncHandler(async (req, res) => {
   const count = await User.countDocuments();
   res.status(200).json(count);
 });
+
+module.exports.profilePhotoUploadCtrl = asyncHandler(async (req, res) => {
+  if (!req.file) {
+    return res.status(400).json({ message: 'No file provided' });
+  }
+  res.status(200).json({ message: 'Your profile photo uploaded successfully' });
+});
