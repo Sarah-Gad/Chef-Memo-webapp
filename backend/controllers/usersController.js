@@ -63,3 +63,13 @@ module.exports.profilePhotoUploadCtrl = asyncHandler(async (req, res) => {
   });
   fs.unlinkSync(imagePath);
 });
+
+module.exports.deleteUserProfileCtrl = asyncHandler(async (req, res) => {
+  const user = await User.findById(req.params.id);
+  if (!user) {
+    return res.status(404).json({ message: 'User not found' });
+  }
+  await cloudinaryRemoveImage(user.profilePhoto.publicId);
+  await User.findByIdAndDelete(req.params.id);
+  res.status(200).json({ message: 'Your profile has been deleted' });
+});
