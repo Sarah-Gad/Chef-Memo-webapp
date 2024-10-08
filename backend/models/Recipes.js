@@ -1,0 +1,90 @@
+const mongoose = require('mongoose');
+const joi = require('joi');
+
+const RecipeSchema = new mongoose.Schema({
+  title: {
+    type: String,
+    required: true,
+    trim: true,
+    minlength: 2,
+    maxlength: 200,
+  },
+  description: {
+    type: String,
+    required: true,
+    trim: true,
+    minlength: 10,
+  },
+  ingredients: [{
+    type: String,
+    required: true,
+    trim: true,
+  }],
+  instructions: [{
+    type: String,
+    required: true,
+    trim: true,
+  }],
+  cookTime: {
+    type: Number,
+    required: true,
+    min: 1,
+  },
+  chef: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User',
+    required: true,
+  },
+  category: {
+    type: String,
+    required: true,
+  },
+  image: {
+    type: Object,
+    default: {
+      url: '',
+      publicId: null,
+    },
+  },
+  likes: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'User',
+    },
+  ],
+}, {
+  timestamps: true,
+});
+
+const Recipe = mongoose.model('Recipe', RecipeSchema);
+
+function validateCreateRecipe(obj) {
+  const schema = joi.object({
+    title: joi.string().trim().min(2).max(200)
+      .required(),
+    description: joi.string().trim().min(10).required(),
+    ingredients: joi.array().items(joi.string().trim().required()).min(1).required(),
+    instructions: joi.array().items(joi.string().trim().required()).min(1).required(),
+    cookTime: joi.number().integer().min(1).required(),
+    category: joi.string().trim().required(),
+  });
+  return schema.validate(obj);
+}
+
+function validateUpdateRecipe(obj) {
+  const schema = joi.object({
+    title: joi.string().trim().min(2).max(200),
+    description: joi.string().trim().min(10),
+    ingredients: joi.array().items(joi.string().trim()).min(1),
+    instructions: joi.array().items(joi.string().trim()).min(1),
+    cookTime: joi.number().integer().min(1),
+    category: joi.string().trim(),
+  });
+  return schema.validate(obj);
+}
+
+module.exports = {
+  Recipe,
+  validateCreateRecipe,
+  validateUpdateRecipe,
+};
