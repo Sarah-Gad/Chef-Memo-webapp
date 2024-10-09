@@ -30,3 +30,36 @@ module.exports.createRecipeCtrl = asyncHandler(async (req, res) => {
   res.status(201).json(recipe);
   fs.unlinkSync(imagePath);
 });
+
+module.exports.getAllRecipesCtrl = asyncHandler(async (req, res) => {
+  const RECIPE_PER_PAGE = 3;
+  const { pageNumber, category } = req.query;
+  let recipes;
+  if (pageNumber) {
+    recipes = await Recipe.find()
+      .skip((pageNumber - 1) * RECIPE_PER_PAGE)
+      .limit(RECIPE_PER_PAGE)
+      .sort({ createdAt: -1 })
+      .populate('chef', ['-password']);
+  } else if (category) {
+    recipes = await Recipe.find({ category })
+      .sort({ createdAt: -1 })
+      .populate('chef', ['-password']);
+  } else {
+    recipes = await Recipe.find()
+      .sort({ createdAt: -1 })
+      .populate('chef', ['-password']);
+  }
+  res.status(200).json(recipes);
+});
+module.exports.getSingleRecipeCtrl = asyncHandler(async (req, res) => {
+  const recipe = await Recipe.findById(req.params.id).populate('chef', ['-password']);
+  if (!recipe) {
+    return res.status(404).json({ message: 'Post not found' });
+  }
+  res.status(200).json(recipe);
+});
+module.exports.getRecipesCountCtrl = asyncHandler(async (req, res) => {
+  const count = await Recipe.countDocuments();
+  res.status(200).json(count);
+});
