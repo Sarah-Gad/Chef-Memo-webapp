@@ -2,7 +2,7 @@ const fs = require('fs');
 const path = require('path');
 const asyncHandler = require('express-async-handler');
 const { Recipe, validateCreateRecipe, validateUpdateRecipe } = require('../models/Recipes');
-const { cloudinaryUploadImage } = require('../utils/cloudinary');
+const { cloudinaryUploadImage, cloudinaryRemoveImage } = require('../utils/cloudinary');
 
 module.exports.createRecipeCtrl = asyncHandler(async (req, res) => {
   if (!req.file) {
@@ -55,11 +55,28 @@ module.exports.getAllRecipesCtrl = asyncHandler(async (req, res) => {
 module.exports.getSingleRecipeCtrl = asyncHandler(async (req, res) => {
   const recipe = await Recipe.findById(req.params.id).populate('chef', ['-password']);
   if (!recipe) {
-    return res.status(404).json({ message: 'Post not found' });
+    return res.status(404).json({ message: 'Recipe not found' });
   }
   res.status(200).json(recipe);
 });
 module.exports.getRecipesCountCtrl = asyncHandler(async (req, res) => {
   const count = await Recipe.countDocuments();
   res.status(200).json(count);
+});
+
+module.exports.deleteRecipeCtrl = asyncHandler(async (req, res) => {
+  const recipe = await Recipe.findById(req.params.id);
+  if (!recipe) {
+    return res.status(404).json({ message: 'Recipe not found' });
+  }
+  if (req.user.isAdmin || req.user.id === recipe.chef.toString()) {
+    await Recipe.findByIdAndDelete(req.params.id);
+    await cloudinaryRemoveImage(recipe.image.publicId);
+    res.status(200).json({
+      message: 'Recipe has been deleted successfully',
+      recipeId: recipe._id,
+    });
+  } else {
+    res.status(403).json({ message: 'Access denied, forbidden ' });
+  }
 });

@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const {
   createRecipeCtrl, getAllRecipesCtrl, getSingleRecipeCtrl, getRecipesCountCtrl,
+  deleteRecipeCtrl,
 } = require('../controllers/recipeController');
 const photoUpload = require('../middlewares/photoUpload');
 const { verifyToken } = require('../middlewares/verifyToken');
@@ -11,6 +12,8 @@ router.route('/')
   .get(getAllRecipesCtrl);
 
 router.route('/count').get(getRecipesCountCtrl);
-router.route('/:id').get(validateObjectId, getSingleRecipeCtrl);
+router.route('/:id')
+  .get(validateObjectId, getSingleRecipeCtrl)
+  .delete(validateObjectId, verifyToken, deleteRecipeCtrl);
 
 module.exports = router;
