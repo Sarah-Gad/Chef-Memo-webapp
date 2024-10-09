@@ -80,3 +80,54 @@ module.exports.deleteRecipeCtrl = asyncHandler(async (req, res) => {
     res.status(403).json({ message: 'Access denied, forbidden ' });
   }
 });
+
+module.exports.updateRecipeCtrl = asyncHandler(async (req, res) => {
+  const { error } = validateUpdateRecipe(req.body);
+  if (error) {
+    return res.status(400).json({ message: error.details[0].message });
+  }
+  const recipe = await Recipe.findById(req.params.id);
+  if (!recipe) {
+    return res.status(404).json({ message: 'Recipe not found' });
+  }
+  if (req.user.id !== recipe.chef.toString()) {
+    return res.status(403).json({ message: 'Access denied, you are not allowed' });
+  }
+  const updatedRecipe = await Recipe.findByIdAndUpdate(req.params.id, {
+    $set: {
+      title: req.body.title,
+      description: req.body.description,
+      ingredients: req.body.ingredients,
+      instructions: req.body.instructions,
+      cookTime: req.body.cookTime,
+      category: req.body.category,
+    },
+  }, { new: true }).populate('chef', ['-password']);
+  res.status(200).json(updatedRecipe);
+});
+
+module.exports.updateRecipeImageCtrl = asyncHandler(async (req, res) => {
+  if (!req.file) {
+    return res.status(400).json({ message: 'No image provided' });
+  }
+  const recipe = await Recipe.findById(req.params.id);
+  if (!recipe) {
+    return res.status(404).json({ message: 'Recipe not found' });
+  }
+  if (req.user.id !== recipe.chef.toString()) {
+    return res.status(403).json({ message: 'Access denied, you are not allowed' });
+  }
+  await cloudinaryRemoveImage(recipe.image.publicId);
+  const imagePath = path.join(__dirname, `../images/${req.file.filename}`);
+  const result = await cloudinaryUploadImage(imagePath);
+  const updatedRecipe = await Recipe.findByIdAndUpdate(req.params.id, {
+    $set: {
+      image: {
+        url: result.secure_url,
+        publicId: result.public_id,
+      },
+    },
+  }, { new: true }).populate('chef', ['-password']);
+  res.status(200).json(updatedRecipe);
+  fs.unlinkSync(imagePath);
+});
