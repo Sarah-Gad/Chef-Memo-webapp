@@ -127,7 +127,29 @@ module.exports.updateRecipeImageCtrl = asyncHandler(async (req, res) => {
         publicId: result.public_id,
       },
     },
-  }, { new: true }).populate('chef', ['-password']);
+  }, { new: true });
   res.status(200).json(updatedRecipe);
   fs.unlinkSync(imagePath);
+});
+
+module.exports.likeCtrl = asyncHandler(async (req, res) => {
+  const loggedInUser = req.user.id;
+  const { id: recipeId } = req.params;
+  let recipe = await Recipe.findById(recipeId);
+  if (!recipe) {
+    return res.status(404).json({ message: 'Recipe not found' });
+  }
+  const isRecipeAlreadyLiked = recipe.likes.find(
+    (user) => user.toString() === loggedInUser,
+  );
+  if (isRecipeAlreadyLiked) {
+    recipe = await Recipe.findByIdAndUpdate(recipeId, {
+      $pull: { likes: loggedInUser },
+    }, { new: true });
+  } else {
+    recipe = await Recipe.findByIdAndUpdate(recipeId, {
+      $push: { likes: loggedInUser },
+    }, { new: true });
+  }
+  res.status(200).json(recipe);
 });

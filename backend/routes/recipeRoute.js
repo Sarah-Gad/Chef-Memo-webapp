@@ -4,6 +4,7 @@ const {
   deleteRecipeCtrl,
   updateRecipeCtrl,
   updateRecipeImageCtrl,
+  likeCtrl,
 } = require('../controllers/recipeController');
 const photoUpload = require('../middlewares/photoUpload');
 const { verifyToken } = require('../middlewares/verifyToken');
@@ -21,5 +22,7 @@ router.route('/:id')
 
 router.route('/update-image/:id')
   .put(validateObjectId, verifyToken, photoUpload.single('image'), updateRecipeImageCtrl);
+
+router.route('/like/:id').put(validateObjectId, verifyToken, likeCtrl);
 
 module.exports = router;
