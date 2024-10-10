@@ -53,7 +53,9 @@ module.exports.getAllRecipesCtrl = asyncHandler(async (req, res) => {
   res.status(200).json(recipes);
 });
 module.exports.getSingleRecipeCtrl = asyncHandler(async (req, res) => {
-  const recipe = await Recipe.findById(req.params.id).populate('chef', ['-password']);
+  const recipe = await Recipe.findById(req.params.id)
+    .populate('chef', ['-password'])
+    .populate('comments');
   if (!recipe) {
     return res.status(404).json({ message: 'Recipe not found' });
   }

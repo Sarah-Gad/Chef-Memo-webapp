@@ -54,6 +54,14 @@ const RecipeSchema = new mongoose.Schema({
   ],
 }, {
   timestamps: true,
+  toJSON: { virtuals: true },
+  toObject: { virtuals: true },
+});
+
+RecipeSchema.virtual('comments', {
+  ref: 'Comment',
+  foreignField: 'recipeId',
+  localField: '_id',
 });
 
 const Recipe = mongoose.model('Recipe', RecipeSchema);
