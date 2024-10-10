@@ -28,8 +28,8 @@ const Comment = mongoose.model('Comment', CommentSchema);
 
 function validateCreateComment(obj) {
   const schema = joi.object({
-    recipeId: joi.string().required(),
-    text: joi.string().trim().required(),
+    recipeId: joi.string().required().label('Recipe ID'),
+    text: joi.string().trim().required().label('Text'),
   });
   return schema.validate(obj);
 }
