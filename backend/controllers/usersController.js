@@ -6,12 +6,12 @@ const { User, validateUpdateUser } = require('../models/User');
 const { cloudinaryUploadImage, cloudinaryRemoveImage } = require('../utils/cloudinary');
 
 module.exports.getAllUsersCtrl = asyncHandler(async (req, res) => {
-  const users = await User.find().select('-password');
+  const users = await User.find().select('-password').populate('recipes');
   res.status(200).json(users);
 });
 
 module.exports.getUserProfileCtrl = asyncHandler(async (req, res) => {
-  const user = await User.findById(req.params.id).select('-password');
+  const user = await User.findById(req.params.id).select('-password').populate('recipes');
   if (!user) {
     return res.status(404).json({ message: 'User not found' });
   }

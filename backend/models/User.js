@@ -44,6 +44,14 @@ const UserSchema = new mongoose.Schema({
   },
 }, {
   timestamps: true,
+  toJSON: { virtuals: true },
+  toObject: { virtuals: true },
+});
+
+UserSchema.virtual('recipes', {
+  ref: 'Recipe',
+  foreignField: 'chef',
+  localField: '_id',
 });
 
 UserSchema.methods.generateAuthToken = function () {
