@@ -16,3 +16,8 @@ module.exports.createCommentCtrl = asyncHandler(async (req, res) => {
   });
   res.status(201).json(comment);
 });
+
+module.exports.getAllCommentsCtrl = asyncHandler(async (req, res) => {
+  const comments = await Comment.find().populate('user');
+  res.status(200).json(comments);
+});
