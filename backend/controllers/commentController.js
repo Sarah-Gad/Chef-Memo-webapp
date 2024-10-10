@@ -21,3 +21,16 @@ module.exports.getAllCommentsCtrl = asyncHandler(async (req, res) => {
   const comments = await Comment.find().populate('user');
   res.status(200).json(comments);
 });
+
+module.exports.deleteCommentCtrl = asyncHandler(async (req, res) => {
+  const comment = await Comment.findById(req.params.id);
+  if (!comment) {
+    return res.status(404).json({ message: 'Comment not found' });
+  }
+  if (req.user.isAdmin || req.user.id === comment.user.toString()) {
+    await Comment.findByIdAndDelete(req.params.id);
+    res.status(200).json({ message: 'Comment has been deleted ' });
+  } else {
+    res.status(403).json({ message: 'Access denied, not allowed' });
+  }
+});
