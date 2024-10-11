@@ -9,6 +9,7 @@ app.use('/api/auth', require('./routes/authRoute'));
 app.use('/api/users', require('./routes/usersRoute'));
 app.use('/api/recipes', require('./routes/recipeRoute'));
 app.use('/api/comments', require('./routes/commentRoute'));
+app.use('/api/categories', require('./routes/categoriesRoute'));
 
 const port = process.env.PORT || 8000;
 app.listen(port, () => {
