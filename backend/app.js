@@ -1,5 +1,6 @@
 const express = require('express');
 const connectToDb = require('./config/connectToDb');
+const { errorHandler, notFound } = require('./middlewares/error');
 require('dotenv').config();
 
 connectToDb();
@@ -10,6 +11,9 @@ app.use('/api/users', require('./routes/usersRoute'));
 app.use('/api/recipes', require('./routes/recipeRoute'));
 app.use('/api/comments', require('./routes/commentRoute'));
 app.use('/api/categories', require('./routes/categoriesRoute'));
+
+app.use(notFound);
+app.use(errorHandler);
 
 const port = process.env.PORT || 8000;
 app.listen(port, () => {
