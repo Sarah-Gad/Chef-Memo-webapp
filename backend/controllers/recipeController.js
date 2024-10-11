@@ -3,6 +3,7 @@ const path = require('path');
 const asyncHandler = require('express-async-handler');
 const { Recipe, validateCreateRecipe, validateUpdateRecipe } = require('../models/Recipes');
 const { cloudinaryUploadImage, cloudinaryRemoveImage } = require('../utils/cloudinary');
+const { Comment } = require('../models/Comment');
 
 module.exports.createRecipeCtrl = asyncHandler(async (req, res) => {
   if (!req.file) {
@@ -74,6 +75,7 @@ module.exports.deleteRecipeCtrl = asyncHandler(async (req, res) => {
   if (req.user.isAdmin || req.user.id === recipe.chef.toString()) {
     await Recipe.findByIdAndDelete(req.params.id);
     await cloudinaryRemoveImage(recipe.image.publicId);
+    await Comment.deleteMany({ recipeId: recipe._id });
     res.status(200).json({
       message: 'Recipe has been deleted successfully',
       recipeId: recipe._id,
