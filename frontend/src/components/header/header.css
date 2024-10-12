@@ -5,26 +5,30 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background-color: var(--blue-color);
+    background-color: var(--white-color);
     position: relative;
     z-index: 99;
-    border-bottom: 2px solid var(--white-color);
+    border-bottom: 2px solid var(--primary-color);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 .header-left {
     display: flex;
     align-items: center;
 }
 .header-logo {
+    font-family: 'Playfair Display', serif;
     font-size: 30px;
     font-weight: bold;
-    color: var(--white-color);
+    color: var(--primary-color);
+    display: flex;
+    align-items: center;
 }
 .header-menu {
     display: none;
 }
 .header-menu .menu-icon {
     font-size: 40px;
-    color: var(--white-color);
+    color: var(--primary-color);
     cursor: pointer;
 }
 .nav-links {
@@ -34,32 +38,38 @@
 .nav-link {
     margin: 0 12px;
     cursor: pointer;
-    font-size: 21px;
+    font-size: 18px;
     font-weight: 500;
-    color: var(--white-color);
+    color: var(--dark-color);
     align-items: center;
     display: flex;
+    transition: color 0.3s ease;
 }
 .nav-link:hover {
-    color: var(--main-color);
+    color: var(--primary-color);
 }
 .nav-link .nav-icon {
     margin-right: 8px;
-    font-size: 24px;
+    font-size: 20px;
     vertical-align: middle;
 }
 .header-right-link {
     margin-left: 10px;
-    font-size: 21px;
+    font-size: 18px;
     font-weight: 500;
-    background-color: var(--white-color);
-    color: var(--blue-color);
-    border-radius: 10px;
-    padding: 5px 10px;
+    background-color: var(--primary-color);
+    color: var(--white-color);
+    border-radius: 25px;
+    padding: 8px 15px;
     align-items: center;
 }
 .header-right-link:hover {
-    background-color: var(--main-color);
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    display: inline-flex;
+}
+.header-right-link:hover {
+    background-color: var(--gray-color);
+    transform: translateY(-2px);
 }
 .header-right-link svg {
     margin-right: 5px;
@@ -78,15 +88,16 @@
         left: 0;
         top: 100%;
         width: 100%;
-        background-color: var(--blue-color);
+        background-color: var(--white-color);
         transition: all .7s ease-in-out;
         clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     }
     .nav-links {
         flex-direction: column;
         align-items: flex-start;
         justify-content: center;
-        padding-left: 30px;
+        padding: 20px 30px;
     }
     .nav-link {
         margin: 0;
@@ -98,13 +109,24 @@
         padding: 0 10px;
     }
     .header-logo {
-        font-size: 17px;
+        font-size: 20px;
+    }
+    .header-logo .chefhatlogo {
+        width: 20px;
+        height: 20px;
     }
     .header-right-link {
-        font-size: 17px;
+        font-size: 11px;
         padding: 5px 7px;
     }
     .header-menu {
-        margin-right: 10px;
+        margin-right: 5px;
+        width: 32px;
+        height: 32px;
+        padding: 4px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-right: 5px;
     }
 }

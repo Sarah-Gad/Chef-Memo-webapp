@@ -1,54 +1,72 @@
 :root {
-    --main-color: #efefef;
-    --primary-color: #1d2d3d;
-    --secondary-color:#495e74 ;
-    --gray-color: #778697;
-    --dark-color: #292b2c;
-    --blue-color: #0275d8;
-    --green-color: #27ae60;
-    --green-sea-color: #16a085;
-    --pumpkin-color: #d35400;
-    --red-color: #d9534f;
-    --white-color: #fff;
-  }
-  * {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-    font-family: 'Segoe UI', 'Roboto', 'Helvetica Neue', sans-serif;
-  }
-  body {
-    background-color: var(--main-color);
-    overflow-x: hidden;
-  }
-  a {
-    text-decoration: none;
-  }
-  ul {
-    list-style: none;
-    padding: 0;
-  }
-  input:focus,
-  select:focus,
-  textarea:focus {
-    outline: none;
-  }
-  /* Some Global Classes For icons */
-  .bi-pencil-square {
-    color: var(--green-sea-color);
-    margin-right: 15px;
-  }
-  .bi-trash-fill {
-    color: var(--red-color);
-  }
-  /* Scrollbar Classes For Google Chrome */
-  html::-webkit-scrollbar {
-    width: 12px;
-  }
-  html::-webkit-scrollbar-track {
-    background-color: rgb(187, 179, 179);
-  }
-  html::-webkit-scrollbar-thumb {
-    background-color: var(--dark-color);
-    border-radius: 15px;
-  }
+  --main-color: #FFF5F7;
+  --primary-color: #D53F8C;
+  --secondary-color: #ED64A6;
+  --gray-color: #B83280;
+  --dark-color: #702459;
+  --accent-color: #9B2C2C;
+  --success-color: #38A169;
+  --error-color: #E53E3E;
+  --white-color: #fff;
+}
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Lora', 'Merriweather', 'Georgia', serif;  
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Playfair Display', 'Cormorant Garamond', serif;  
+}
+
+body {
+  background-color: var(--main-color);
+  overflow-x: hidden;
+  color: var(--dark-color);
+  line-height: 1.6;
+}
+
+a {
+  text-decoration: none;
+  color: var(--primary-color);
+  transition: color 0.3s ease;
+}
+
+a:hover {
+  color: var(--secondary-color);
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  outline: none;
+  border-color: var(--secondary-color);
+}
+
+/* Icon Classes */
+.bi-pencil-square {
+  color: var(--secondary-color);
+  margin-right: 15px;
+}
+
+.bi-trash-fill {
+  color: var(--error-color);
+}
+
+/* Scrollbar Styles */
+html::-webkit-scrollbar {
+  width: 12px;
+}
+html::-webkit-scrollbar-track {
+  background-color: var(--main-color);
+}
+html::-webkit-scrollbar-thumb {
+  background-color: var(--secondary-color);
+  border-radius: 15px;
+}
