@@ -1,12 +1,12 @@
 :root {
-  --main-color: #ECB3B2;          /* Light pink from the top row */
-  --primary-color: #E49795;       /* Medium pink from the second row */
-  --secondary-color: #DC7B79;     /* Darker pink from the third row */
-  --gray-color: #C49594;          /* Muted pink-gray from middle column */
-  --dark-color: #5C3130;          /* Deep pink-brown from bottom right */
-  --accent-color: #D65D5B;        /* Vibrant pink from third row */
-  --success-color: #E8CDCC;       /* Very light pink from top row */
-  --error-color: #983B39;         /* Dark pink from bottom row */
+  --main-color: #ECB3B2;
+  --primary-color: #E49795;
+  --secondary-color: #DC7B79;
+  --gray-color: #C49594;
+  --dark-color: #5C3130;
+  --accent-color: #D65D5B;
+  --success-color: #E8CDCC;
+  --error-color: #983B39;
   --white-color: #FFF8F8;
   --recipe-bg-color: #FFF0F0;
 }

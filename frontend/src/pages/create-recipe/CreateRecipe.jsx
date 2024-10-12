@@ -1,5 +1,5 @@
 import "./create-recipe.css";
-import { toast, ToastContainer } from "react-toastify";
+import { toast } from "react-toastify";
 import { useState } from "react";
 
 const CreateRecipe = () => {
@@ -36,7 +36,6 @@ const CreateRecipe = () => {
 
     return (
         <section className="create-recipe">
-            <ToastContainer position="top-center"/>
         <h1 className="create-recipe-title">Add Your Signature Dish</h1>
         <form onSubmit={formSubmitHandler} className="create-recipe-form">
             <input

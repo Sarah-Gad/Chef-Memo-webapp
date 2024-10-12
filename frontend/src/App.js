@@ -7,10 +7,13 @@ import RecipesPage from "./pages/recipes-page/RecipesPage"
 import AdminDashboard from "./pages/admin/AdminDashboard"
 import CreateRecipe from "./pages/create-recipe/CreateRecipe"
 import Footer from "./components/footer/Footer";
+import RecipeDetails from "./pages/recipe-details/RecipeDetails";
+import { ToastContainer } from "react-toastify";
 
 function App() {
   return (
     <BrowserRouter>
+    <ToastContainer position="top-center" />
       <Header />
       <Routes>
         <Route path="/" element={<Home />} />
@@ -18,6 +21,7 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/recipes" element={<RecipesPage />} />
         <Route path="/recipes/create-recipe" element={<CreateRecipe />} />
+        <Route path="/recipes/details/:id" element={<RecipeDetails />} />
         <Route path="/admin-dashboard" element={<AdminDashboard />} />
       </Routes>
       <Footer />

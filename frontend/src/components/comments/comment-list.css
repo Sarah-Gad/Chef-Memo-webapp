@@ -1,0 +1,86 @@
+.comment-list {
+    padding: 20px;
+    border-radius: 12px;
+    margin: 20px 0;
+    background-color: var(--success-color);
+}
+.comment-list-count {
+    font-size: 28px;
+    color: var(--dark-color);
+    border-bottom: 2px solid var(--main-color);
+    padding-bottom: 10px;
+    margin-bottom: 25px;
+    font-family: 'Playfair Display', 'Cormorant Garamond', serif;
+    text-align: center;
+}
+.comment-item {
+    padding: 15px;
+    background-color: var(--white-color);
+    border-radius: 10px;
+    margin-top: 20px;
+    box-shadow: 0 3px 10px rgba(92, 49, 48, 0.08);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.comment-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(92, 49, 48, 0.12);
+}
+.comment-item-info {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+}
+.comment-item-user-info {
+    display: flex;
+    align-items: center;
+}
+.comment-item-user-photo {
+    height: 45px;
+    width: 45px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 12px;
+    border: 2px solid var(--main-color);
+}
+.comment-item-username {
+    font-size: 16px;
+    font-weight: bold;
+    color: var(--accent-color);
+    margin-bottom: 2px;
+}
+.comment-item-time {
+    font-size: 14px;
+    color: var(--gray-color);
+    display: block;
+}
+.comment-item-text {
+    padding: 12px 0;
+    color: var(--dark-color);
+    font-size: 16px;
+    line-height: 1.6;
+}
+.comment-item-icon-wrapper {
+    padding: 10px 0 0;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    border-top: 1px solid var(--success-color);
+}
+.comment-item-icon-wrapper i {
+    cursor: pointer;
+    color: var(--gray-color);
+    transition: color 0.3s ease, transform 0.2s ease;
+}
+.comment-item-icon-wrapper i:hover {
+    color: var(--accent-color);
+    transform: scale(1.1);
+}
+.comment-list::before {
+    content: '❤';
+    display: block;
+    text-align: center;
+    font-size: 24px;
+    color: var(--accent-color);
+    margin-bottom: 10px;
+}
