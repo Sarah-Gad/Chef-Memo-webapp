@@ -6,6 +6,7 @@ import Register from "./pages/forms/Register"
 import RecipesPage from "./pages/recipes-page/RecipesPage"
 import AdminDashboard from "./pages/admin/AdminDashboard"
 import CreateRecipe from "./pages/create-recipe/CreateRecipe"
+import Footer from "./components/footer/Footer";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
         <Route path="/recipes/create-recipe" element={<CreateRecipe />} />
         <Route path="/admin-dashboard" element={<AdminDashboard />} />
       </Routes>
+      <Footer />
     </BrowserRouter>
 
   );
