@@ -1,0 +1,60 @@
+.sidebar {
+    flex: 3;
+    margin-left: 20px;
+}
+.sidebar-title {
+    color: var(--dark-color);
+    text-align: center;
+    padding: 10px;
+    font-size: 24px;
+    border-top: 2px solid var(--primary-color);
+    border-bottom: 2px solid var(--primary-color);
+    margin-bottom: 20px;
+}
+.sidebar-links {
+    padding: 10px;
+}
+.sidebar-link {
+    margin: 15px 0;
+    font-size: 17px;
+    font-weight: 500;
+    color: var(--dark-color);
+    cursor: pointer;
+    background-color: var(--recipe-bg-color);
+    text-align: center;
+    padding: 12px 15px;
+    border-radius: 20px;
+    position: relative;
+    text-transform: capitalize;
+    display: block;
+    transition: all 0.3s ease;
+    border: 1px solid var(--primary-color);
+    box-shadow: 0 2px 5px rgba(228, 151, 149, 0.2);
+}
+.sidebar-link:hover {
+    background-color: var(--primary-color);
+    color: var(--white-color);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(228, 151, 149, 0.3);
+}
+.sidebar-link:hover::before {
+    background-color: var(--white-color);
+}
+@media (max-width: 990px) {
+    .sidebar {
+        margin-left: 0;
+        width: 100%;
+    }
+    .sidebar-link::after {
+        left: 30px;
+    }
+}
+@media (max-width: 520px) {
+    .sidebar-link::after {
+        left: 20px;
+    }
+    .sidebar-link {
+        padding: 10px 12px;
+        font-size: 16px;
+    }
+}
