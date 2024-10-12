@@ -1,16 +1,17 @@
+import { Link } from "react-router-dom"
 import { UserRoundPlus, LogOut } from 'lucide-react';
 
 const HeaderRight = () => {
 return (
     <div className="header-right">
-            <button className="header-right-link">
+            <Link to="/login" className="header-right-link">
                 <LogOut size={20} />
                 <span>Login</span>
-            </button>
-            <button className="header-right-link">
+            </Link>
+            <Link to="/register" className="header-right-link">
                 <UserRoundPlus size={20} />
                 <span>Register</span>
-            </button>
+            </Link>
         </div>
     );
 }
