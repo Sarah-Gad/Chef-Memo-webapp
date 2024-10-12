@@ -15,16 +15,18 @@ const RecipeSchema = new mongoose.Schema({
     trim: true,
     minlength: 10,
   },
-  ingredients: [{
+  ingredients: {
     type: String,
     required: true,
     trim: true,
-  }],
-  instructions: [{
+    minlength: 10,
+  },
+  instructions: {
     type: String,
     required: true,
     trim: true,
-  }],
+    minlength: 10,
+  },
   cookTime: {
     type: Number,
     required: true,
@@ -71,8 +73,8 @@ function validateCreateRecipe(obj) {
     title: joi.string().trim().min(2).max(200)
       .required(),
     description: joi.string().trim().min(10).required(),
-    ingredients: joi.array().items(joi.string().trim().required()).min(1).required(),
-    instructions: joi.array().items(joi.string().trim().required()).min(1).required(),
+    ingredients: joi.string().trim().min(10).required(),
+    instructions: joi.string().trim().min(10).required(),
     cookTime: joi.number().integer().min(1).required(),
     category: joi.string().trim().required(),
   });
@@ -83,8 +85,8 @@ function validateUpdateRecipe(obj) {
   const schema = joi.object({
     title: joi.string().trim().min(2).max(200),
     description: joi.string().trim().min(10),
-    ingredients: joi.array().items(joi.string().trim()).min(1),
-    instructions: joi.array().items(joi.string().trim()).min(1),
+    ingredients: joi.string().trim().min(10),
+    instructions: joi.string().trim().min(10),
     cookTime: joi.number().integer().min(1),
     category: joi.string().trim(),
   });

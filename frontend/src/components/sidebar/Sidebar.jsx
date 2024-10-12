@@ -8,7 +8,7 @@ const Sidebar = ({ categories }) => {
         <ul className="sidebar-links">
           {categories.map((category) => (
             <Link
-              to={`/posts/categories/${category.title}`}
+              to={`/recipes/categories/${category.title}`}
               key={category._id}
               className="sidebar-link"
             >
@@ -19,5 +19,5 @@ const Sidebar = ({ categories }) => {
       </div>
     );
   };
-  
+
   export default Sidebar;

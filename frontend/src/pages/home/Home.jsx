@@ -12,7 +12,7 @@ const Home = () => {
           <h1 className="home-title">The secret ingredient is always love!</h1>
         </div>
       </div>
-      <div className="home-latest-post">Latest Recipes</div>
+      <div className="home-latest-recipe">Latest Recipes</div>
       <div className="home-container">
         <RcipeList recipes={recipes.slice(0, 3)} />
         <Sidebar categories={categories} />

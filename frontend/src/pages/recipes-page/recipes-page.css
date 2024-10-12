@@ -5,13 +5,13 @@
 }
 /* Media Queries */
 @media (max-width: 990px) {
-    .posts-page {
+    .recipes-page {
         flex-direction: column;
         align-items: center;
     }
 }
 @media (max-width: 520px) {
-    .posts-page {
+    .recipes-page {
         padding: 15px;
     }
 }

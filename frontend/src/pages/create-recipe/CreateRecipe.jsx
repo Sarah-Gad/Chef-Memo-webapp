@@ -1,5 +1,104 @@
-const CreateRecipe = () => {
-    return ( <h1>Create Recipe page</h1> );
-}
+import "./create-recipe.css";
+import { toast, ToastContainer } from "react-toastify";
+import { useState } from "react";
 
-export default CreateRecipe;
+const CreateRecipe = () => {
+    const [title, setTitle] = useState("");
+    const [description, setDescription] = useState("");
+    const [ingredients, setIngredients] = useState("");
+    const [instructions, setInstructions] = useState("");
+    const [category, setCategory] = useState("");
+    const [cookTime, setCookTime] = useState("");
+    const [file, setFile] = useState(null);
+
+    const formSubmitHandler = (e) => {
+        e.preventDefault();
+        if (title.trim() === "") return toast.error("Recipe Name is required");
+        if (category.trim() === "") return toast.error("Recipe Category is required");
+        if (description.trim() === "")
+            return toast.error("Recipe Description is required");
+        if (ingredients.trim() === "")
+            return toast.error("Recipe ingredients is required");
+        if (instructions.trim() === "")
+            return toast.error("Recipe instructions is required");
+        if (cookTime.trim() === "") return toast.error("Recipe Cook Time is required");
+        if (!file) return toast.error("Recipe Image is required");
+        const formData = new FormData();
+        formData.append("image", file);
+        formData.append("title", title);
+        formData.append("description", description);
+        formData.append("ingredients", ingredients);
+        formData.append("instructions", instructions);
+        formData.append("cookTime", cookTime);
+        formData.append("category", category);
+        console.log({ title, category, description, ingredients, instructions, cookTime, file});
+        };
+
+    return (
+        <section className="create-recipe">
+            <ToastContainer position="top-center"/>
+        <h1 className="create-recipe-title">Add Your Signature Dish</h1>
+        <form onSubmit={formSubmitHandler} className="create-recipe-form">
+            <input
+            onChange={(e) => setTitle(e.target.value)}
+            value={title}
+            type="text"
+            placeholder="Name Your Dish"
+            className="create-recipe-input"
+            />
+            <select
+            className="create-recipe-input"
+            value={category}
+            onChange={(e) => setCategory(e.target.value)}
+            >
+            <option disabled value="">
+                Select A Category
+            </option>
+            <option value="salads">salads</option>
+            <option value="beverages">beverages</option>
+            </select>
+            <textarea
+            className="create-recipe-textarea"
+            placeholder="Recipe Description"
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+            rows="5"
+            ></textarea>
+            <textarea
+            className="create-recipe-textarea"
+            placeholder="Recipe ingredients"
+            value={ingredients}
+            onChange={(e) => setIngredients(e.target.value)}
+            rows="5"
+            ></textarea>
+            <textarea
+            className="create-recipe-textarea"
+            placeholder="Recipe instructions"
+            value={instructions}
+            onChange={(e) => setInstructions(e.target.value)}
+            rows="5"
+            ></textarea>
+            <input
+            value={cookTime}
+            onChange={(e) => setCookTime(e.target.value)}
+            type="number"
+            min="1"
+            placeholder="Cook Time in Minutes"
+            className="create-recipe-cooktime"
+            />
+            <input
+            className="create-recipe-upload"
+            type="file"
+            name="file"
+            id="file"
+            onChange={(e) => setFile(e.target.files[0])}
+            />
+            <button type="submit" className="create-recipe-btn">
+            Add
+            </button>
+        </form>
+        </section>
+    );
+    };
+
+    export default CreateRecipe;
