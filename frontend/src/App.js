@@ -9,6 +9,7 @@ import CreateRecipe from "./pages/create-recipe/CreateRecipe"
 import Footer from "./components/footer/Footer";
 import RecipeDetails from "./pages/recipe-details/RecipeDetails";
 import { ToastContainer } from "react-toastify";
+import Category from "./pages/category/Category";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
         <Route path="/recipes" element={<RecipesPage />} />
         <Route path="/recipes/create-recipe" element={<CreateRecipe />} />
         <Route path="/recipes/details/:id" element={<RecipeDetails />} />
+        <Route path="/recipes/categories/:category" element={<Category />} />
         <Route path="/admin-dashboard" element={<AdminDashboard />} />
       </Routes>
       <Footer />
