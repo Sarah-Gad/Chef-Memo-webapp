@@ -7,6 +7,7 @@ import { recipes } from "../../dummyData";
 import "./recipe-details.css";
 import { toast } from "react-toastify";
 import swal from "sweetalert";
+import UpdateRecipeModal from "./UpdateRecipeModal";
 
 const RecipeDetails = () => {
 
@@ -121,6 +122,7 @@ const RecipeDetails = () => {
             </div>
             <AddComment />
             <CommentList />
+            {updaterecipe && <UpdateRecipeModal setUpdaterecipe={setUpdaterecipe} recipe={recipe} />}
             </section>
         );
     };

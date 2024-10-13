@@ -18,10 +18,10 @@ const CreateRecipe = () => {
         if (description.trim() === "")
             return toast.error("Recipe Description is required");
         if (ingredients.trim() === "")
-            return toast.error("Recipe ingredients is required");
+            return toast.error("Recipe ingredients are required");
         if (instructions.trim() === "")
-            return toast.error("Recipe instructions is required");
-        if (cookTime.trim() === "") return toast.error("Recipe Cook Time is required");
+            return toast.error("Recipe instructions are required");
+        if (!cookTime) return toast.error("Recipe Cook Time is required");
         if (!file) return toast.error("Recipe Image is required");
         const formData = new FormData();
         formData.append("image", file);

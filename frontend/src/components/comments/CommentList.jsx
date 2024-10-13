@@ -1,6 +1,7 @@
 import { useState } from "react";
 import "./comment-list.css";
 import swal from "sweetalert";
+import UpdateCommentModal from "./UpdateCommentModal";
 
 const CommentList = () => {
 
@@ -52,6 +53,7 @@ const CommentList = () => {
             </div>
             </div>
         ))}
+        { updateComment && <UpdateCommentModal setUpdateComment={setUpdateComment} />}
         </div>
     );
 };
