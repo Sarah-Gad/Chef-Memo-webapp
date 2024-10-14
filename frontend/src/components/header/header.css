@@ -75,6 +75,59 @@
     margin-right: 5px;
     vertical-align: middle;
 }
+.header-right-user-info {
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+.header-right-username {
+    font-size: 21px;
+    font-weight: 500;
+    color: var(--dark-color);
+    margin-right: 10px;
+    text-transform: capitalize;
+    cursor: pointer;
+}
+.header-right-user-photo {
+    width: 48px;
+    height: 48px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 2px solid var(--main-color);
+}
+.header-right-dropdown {
+  position: absolute;
+  right: 0;
+  top: 120%;
+  background-color: var(--white-color);
+  border-radius: 8px;
+  padding: 12px;
+  width: 200px;
+  text-align: left;
+  box-shadow: 0 4px 20px rgba(92, 49, 48, 0.15);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-10px);
+  transition: all 0.3s ease;
+}
+.header-right-user-info:hover .header-right-dropdown {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+.header-dropdown-item {
+  color: var(--dark-color);
+  font-weight: 500;
+  font-size: 16px;
+  padding: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border-radius: 6px;
+}
+.header-dropdown-item:hover {
+  color: var(--accent-color);
+  background-color: var(--recipe-bg-color);
+}
 @media (max-width: 990px) {
     .header-left {
         flex-direction: row-reverse;
