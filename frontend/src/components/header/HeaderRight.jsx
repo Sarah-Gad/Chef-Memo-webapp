@@ -1,11 +1,19 @@
 import { Link } from "react-router-dom";
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { UserRoundPlus, LogOut } from 'lucide-react';
 import { useState } from "react";
+import { logoutUser } from "../../redux/apiCalls/authApiCall";
 
 const HeaderRight = () => {
+    const dispatch = useDispatch();
     const { user } = useSelector(state => state.auth);
     const [dropdown, setDropdown] = useState(false);
+
+    const logoutHandler = () => {
+        setDropdown(false);
+        dispatch(logoutUser());
+    }
+
     return (
         <div className="header-right">
             {user ?
@@ -24,7 +32,7 @@ const HeaderRight = () => {
                     <i className="bi bi-file-person"></i>
                     <span>Profile</span>
                     </Link>
-                    <div className="header-dropdown-item">
+                    <div onClick={logoutHandler} className="header-dropdown-item">
                         <i className="bi bi-box-arrow-in-left">
                             <span>Logout</span>
                         </i>
