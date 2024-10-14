@@ -14,9 +14,6 @@ return (
                 <Link to="/recipes/create-recipe" onClick={() => setToggle(false)} className="nav-link">
                     <BookHeart size={26} className="nav-icon" /> Share Your Recipe
                 </Link>
-                <Link to="/admin-dashboard" onClick={() => setToggle(false)} className="nav-link">
-                    <CircleUserRound size={26} className="nav-icon" /> Admin Dashboard
-                </Link>
             </ul>
         </nav>
     );

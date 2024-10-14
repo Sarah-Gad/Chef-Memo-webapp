@@ -11,6 +11,8 @@ import RecipeDetails from "./pages/recipe-details/RecipeDetails";
 import { ToastContainer } from "react-toastify";
 import Category from "./pages/category/Category";
 import Profile from "./pages/profile/Profile";
+import ForgotPassword from "./pages/forms/ForgotPassword";
+import ResetPassword from './pages/forms/ResetPassword';
 
 function App() {
   return (
@@ -21,6 +23,8 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/forgot-password" element={<ForgotPassword />} />
+        <Route path="/reset-password" element={<ResetPassword />} />
         <Route path="/profile/:id" element={<Profile />} />
         <Route path="/recipes" element={<RecipesPage />} />
         <Route path="/recipes/create-recipe" element={<CreateRecipe />} />
