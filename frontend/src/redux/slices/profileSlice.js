@@ -8,6 +8,9 @@ const profileSlice = createSlice({
     reducers: {
         setProfile(state, action) {
             state.profile = action.payload;
+        },
+        setProfilePhoto(state, action) {
+            state.profile.profilePhoto = action.payload;
         }
     }
 });

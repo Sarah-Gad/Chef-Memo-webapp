@@ -7,7 +7,7 @@ import { useParams } from "react-router-dom";
 import UpdateProfileModal from "./UpdateProfileModal";
 import swal from "sweetalert";
 import { toast } from "react-toastify";
-import { getUserProfile } from "../../redux/apiCalls/profileApiCall";
+import { getUserProfile, uploadProfilePhoto } from "../../redux/apiCalls/profileApiCall";
 
 const Profile = () => {
   const [updateProfile, setUpdateProfile] = useState(false);
@@ -25,7 +25,9 @@ const Profile = () => {
   const formSubmitHandler = (e) => {
     e.preventDefault();
     if(!file) return toast.error("There is no image provided!");
-    console.log("image uploaded");
+    const formData = new FormData();
+    formData.append("image", file);
+    dispatch(uploadProfilePhoto(formData));
   }
 
   // Delete Account Handler
