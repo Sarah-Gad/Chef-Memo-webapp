@@ -41,9 +41,7 @@ const RecipeDetails = () => {
                 icon: "success",
             });
         } else {
-            swal("Your recipe is safe!", {
-                icon: "info",
-            });
+            swal("Your recipe is safe!");
         }
     });
 };

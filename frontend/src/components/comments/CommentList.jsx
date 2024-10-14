@@ -21,9 +21,7 @@ const CommentList = () => {
                     icon: "success",
                 });
             } else {
-                swal("Your comment stays!", {
-                    icon: "info",
-                });
+                swal("Your comment stays!");
             }
         });
     };
