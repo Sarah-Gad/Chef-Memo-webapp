@@ -10,7 +10,6 @@ export function loginUser(user) {
             localStorage.setItem("userInfo", JSON.stringify(data));
         } catch (error) {
             toast.error(error.response.data.message);
-            console.log(error);
         }
     }
 };
@@ -19,5 +18,16 @@ export function logoutUser() {
     return (dispatch) => {
         dispatch(authActions.logout());
         localStorage.removeItem("userInfo");
+    }
+};
+
+export function registerUser(user) {
+    return async (dispatch) => {
+        try {
+            const { data } = await request.post("/api/auth/register", user)
+            dispatch(authActions.register(data.message));
+        } catch (error) {
+            toast.error(error.response.data.message);
+        }
     }
 };
