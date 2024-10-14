@@ -93,7 +93,7 @@ const Profile = () => {
       <button onClick={deleteAccountHandler} className="delete-account-btn">
         Delete Your Account
       </button>
-      {updateProfile && <UpdateProfileModal setUpdateProfile={setUpdateProfile} />}
+      {updateProfile && <UpdateProfileModal profile={profile} setUpdateProfile={setUpdateProfile} />}
     </section>
   );
 };
