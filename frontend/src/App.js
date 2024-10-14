@@ -13,6 +13,7 @@ import Category from "./pages/category/Category";
 import Profile from "./pages/profile/Profile";
 import ForgotPassword from "./pages/forms/ForgotPassword";
 import ResetPassword from './pages/forms/ResetPassword';
+import NotFound from "./pages/not-found/NotFound";
 
 function App() {
   return (
@@ -31,6 +32,7 @@ function App() {
         <Route path="/recipes/details/:id" element={<RecipeDetails />} />
         <Route path="/recipes/categories/:category" element={<Category />} />
         <Route path="/admin-dashboard" element={<AdminDashboard />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
       <Footer />
     </BrowserRouter>
