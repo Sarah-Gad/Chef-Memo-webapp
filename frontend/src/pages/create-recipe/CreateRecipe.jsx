@@ -5,11 +5,13 @@ import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { createRecipe } from "../../redux/apiCalls/recipeApiCall";
 import { fetchCategories } from "../../redux/apiCalls/categoryApiCall";
+import swal from "sweetalert";
 
 const CreateRecipe = () => {
     const dispatch = useDispatch();
     const { loading, isRecipeCreated } = useSelector(state => state.recipe);
     const { categories } = useSelector(state => state.category);
+    const { user } = useSelector(state => state.auth);
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
     const [ingredients, setIngredients] = useState("");
@@ -51,7 +53,25 @@ const CreateRecipe = () => {
 
     useEffect(() => {
         dispatch(fetchCategories());
-      }, []);
+    }, []);
+
+    useEffect(() => {
+        if (!user) {
+        swal({
+            title: "Login Required",
+            text: "You need to be logged in to share a recipe. Please log in or sign up to continue.",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        }).then((willDelete) => {
+            if (willDelete) {
+            navigate("/login");
+            } else {
+            navigate("/");
+            }
+        });
+        }
+    }, [user]);
 
     return (
         <section className="create-recipe">

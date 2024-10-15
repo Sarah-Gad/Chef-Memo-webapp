@@ -14,13 +14,9 @@ const Navbar = ({toggle, setToggle}) => {
                     <Link to="/recipes" onClick={() => setToggle(false)} className="nav-link">
                         <CookingPot size={26} className="nav-icon" /> Recipes
                     </Link>
-                    {
-                        user && (
-                            <Link to="/recipes/create-recipe" onClick={() => setToggle(false)} className="nav-link">
+                    <Link to="/recipes/create-recipe" onClick={() => setToggle(false)} className="nav-link">
                             <BookHeart size={26} className="nav-icon" /> Share Your Recipe
-                            </Link>
-                        )
-                    }
+                    </Link>
                 </ul>
             </nav>
         );

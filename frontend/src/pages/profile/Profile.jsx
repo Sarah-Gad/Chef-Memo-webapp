@@ -108,7 +108,7 @@ const Profile = () => {
       <div className="profile-recipes-list">
       <h2 className="profile-recipes-list-title">Recipes of {profile?.username} </h2>
       {profile?.recipes?.length > 0 ? (
-          profile.recipes.map(recipe => (
+          profile?.recipes?.map(recipe => (
             <RecipeItem key={recipe._id} recipe={recipe} username={profile?.username} userId={profile?._id} />
           ))
         ) : (

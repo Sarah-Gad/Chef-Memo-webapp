@@ -30,7 +30,7 @@ function App() {
         <Route path="/reset-password" element={<ResetPassword />} />
         <Route path="/profile/:id" element={<Profile />} />
         <Route path="/recipes" element={<RecipesPage />} />
-        <Route path="/recipes/create-recipe" element={ user ? <CreateRecipe /> : <Navigate to="/" />} />
+        <Route path="/recipes/create-recipe" element={<CreateRecipe />} />
         <Route path="/recipes/details/:id" element={<RecipeDetails />} />
         <Route path="/recipes/categories/:category" element={<Category />} />
         <Route path="*" element={<NotFound />} />
