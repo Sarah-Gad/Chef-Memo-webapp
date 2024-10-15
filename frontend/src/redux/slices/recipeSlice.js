@@ -8,6 +8,7 @@ const recipeSlice = createSlice({
         recipesCate: [],
         loading: false,
         isRecipeCreated: false,
+        recipe: null,
     },
     reducers: {
         setRecipes(state, action) {
@@ -31,6 +32,12 @@ const recipeSlice = createSlice({
         },
         clearIsRecipeCretaed(state) {
             state.isRecipeCreated = false;
+        },
+        setRecipe(state, action) {
+            state.recipe = action.payload;
+        },
+        setLike(state, action) {
+            state.recipe.likes = action.payload.likes;
         },
     }
 });

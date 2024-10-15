@@ -53,3 +53,29 @@ export function createRecipe(newRecipe) {
         }
     }
 };
+
+export function getRecipe(recipeId) {
+    return async (dispatch) => {
+        try {
+            const { data } = await request.get(`/api/recipes/${recipeId}`)
+            dispatch(recipeActions.setRecipe(data));
+        } catch (error) {
+            toast.error(error.response.data.message);
+        }
+    }
+};
+
+export function recipeLike(recipeId) {
+    return async (dispatch, getState) => {
+        try {
+            const { data } = await request.put(`/api/recipes/like/${recipeId}`, {}, {
+                headers: {
+                    Authorization: "Bearer " + getState().auth.user.token,
+                }
+            })
+            dispatch(recipeActions.setLike(data));
+        } catch (error) {
+            toast.error(error.response.data.message);
+        }
+    }
+};

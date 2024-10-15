@@ -125,6 +125,15 @@
 .heart-icon:hover {
     transform: scale(1.1);
 }
+.heart-icon-fill {
+    color: #ff4b4b;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+    fill: #ff4b4b;  /* This fills the heart icon */
+}
+.heart-icon-fill:hover {
+    transform: scale(1.1);
+}
 .recipe-likes small {
     font-size: 16px;
     color: var(--dark-color);
