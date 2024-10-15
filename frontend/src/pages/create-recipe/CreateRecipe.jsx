@@ -1,8 +1,13 @@
 import "./create-recipe.css";
 import { toast } from "react-toastify";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { createRecipe } from "../../redux/apiCalls/recipeApiCall";
 
 const CreateRecipe = () => {
+    const dispatch = useDispatch();
+    const { loading, isRecipeCreated } = useSelector(state => state.recipe);
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
     const [ingredients, setIngredients] = useState("");
@@ -31,8 +36,16 @@ const CreateRecipe = () => {
         formData.append("instructions", instructions);
         formData.append("cookTime", cookTime);
         formData.append("category", category);
-        console.log({ title, category, description, ingredients, instructions, cookTime, file});
+        dispatch(createRecipe(formData));
         };
+
+    const navigate = useNavigate();
+    useEffect(() => {
+        if(isRecipeCreated) {
+            navigate("/")
+        }
+        window.scrollTo(0,0);
+    }, [isRecipeCreated, navigate]);
 
     return (
         <section className="create-recipe">
@@ -93,7 +106,9 @@ const CreateRecipe = () => {
             onChange={(e) => setFile(e.target.files[0])}
             />
             <button type="submit" className="create-recipe-btn">
-            Add
+            {
+                loading ? "Loading the recipe..." : "Add recipe"
+            }
             </button>
         </form>
         </section>

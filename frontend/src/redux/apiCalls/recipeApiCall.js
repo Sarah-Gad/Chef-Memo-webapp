@@ -34,3 +34,22 @@ export function fetchRecipesBasedOnCate(category) {
         }
     }
 };
+
+export function createRecipe(newRecipe) {
+    return async (dispatch, getState) => {
+        try {
+            dispatch(recipeActions.setLoading());
+            await request.post(`/api/recipes`, newRecipe, {
+                headers: {
+                    Authorization: "Bearer " + getState().auth.user.token,
+                    "Content-Type" : "multipart/form-data"
+                }
+            })
+            dispatch(recipeActions.setIsRecipeCretaed());
+            setTimeout(() => dispatch(recipeActions.clearIsRecipeCretaed()), 2000);
+        } catch (error) {
+            toast.error(error.response.data.message);
+            dispatch(recipeActions.clearLoading());
+        }
+    }
+};
