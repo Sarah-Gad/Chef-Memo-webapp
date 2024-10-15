@@ -42,6 +42,19 @@ const recipeSlice = createSlice({
         deleteRecipe(state, action) {
             state.recipes = state.recipes.filter(r => r._id !== action.payload);
         },
+        addComment(state, action) {
+            state.recipe.comments.push(action.payload);
+        },
+        updateComment(state, action) {
+            state.recipe.comments = state.recipe.comments.map(comment =>
+                comment._id === action.payload._id ? action.payload : comment
+            )
+        },
+        deleteComment(state, action) {
+            const comment = state.recipe.comments.find(c => c._id === action.payload);
+            const commentIndex = state.recipe.comments.indexOf(comment);
+            state.recipe.comments.splice(commentIndex, 1);
+        }
     }
 });
 

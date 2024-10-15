@@ -132,7 +132,12 @@ const RecipeDetails = () => {
                 </div>
                 )}
             </div>
-            <AddComment />
+            {
+            user ? <AddComment recipeId={recipe?._id}/> :
+            <p className="recipe-details-info-write" >
+              to write a comment, you should login first
+            </p>
+            }
             <CommentList comments={recipe?.comments} />
             {updaterecipe && <UpdateRecipeModal setUpdaterecipe={setUpdaterecipe} recipe={recipe} />}
             </section>

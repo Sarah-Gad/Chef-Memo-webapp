@@ -4,13 +4,21 @@ import swal from "sweetalert";
 import UpdateCommentModal from "./UpdateCommentModal";
 import Moment from "react-moment";
 import { useDispatch, useSelector } from "react-redux";
+import { deleteComment } from "../../redux/apiCalls/commentApiCall";
 
 const CommentList = ({ comments}) => {
+    const dispatch = useDispatch();
     const { user } = useSelector(state => state.auth)
     const [updateComment, setUpdateComment] = useState(false);
+    const [commentForUpdate, setCommentForUpdate] = useState(null);
+
+    const updateCommentHandler = (comment) => {
+      setCommentForUpdate(comment);
+      setUpdateComment(true);
+    }
 
     //Delete Comment Handler
-    const deleteCommentHandler = () => {
+    const deleteCommentHandler = (commentId) => {
         swal({
             title: "Delete this comment?",
             text: "Once deleted, you won't be able to recover this comment!",
@@ -19,11 +27,7 @@ const CommentList = ({ comments}) => {
             dangerMode: true,
         }).then((willDelete) => {
             if (willDelete) {
-                swal("Your comment has been deleted!", {
-                    icon: "success",
-                });
-            } else {
-                swal("Your comment stays!");
+                dispatch(deleteComment(commentId));
             }
         });
     };
@@ -51,16 +55,16 @@ const CommentList = ({ comments}) => {
                 user?._id === comment.user && (
                 <div className="comment-item-icon-wrapper">
                 <i
-                onClick={() => setUpdateComment(true)}
+                onClick={() => updateCommentHandler(comment)}
                 className="bi bi-pencil-square"
                 ></i>
-                <i onClick={deleteCommentHandler} className="bi bi-trash-fill"></i>
+                <i onClick={() => deleteCommentHandler(comment?._id)} className="bi bi-trash-fill"></i>
             </div>
                 )
             }
             </div>
         ))}
-        { updateComment && <UpdateCommentModal setUpdateComment={setUpdateComment} />}
+        { updateComment && <UpdateCommentModal commentForUpdate={commentForUpdate} setUpdateComment={setUpdateComment} />}
         </div>
     );
 };
