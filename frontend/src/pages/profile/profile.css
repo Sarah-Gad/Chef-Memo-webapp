@@ -2,6 +2,13 @@
   padding: 30px;
   background-color: var(--white-color);
 }
+.profile-loader {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: var(--white-color);
+}
 .profile-header {
   width: 95%;
   max-width: 1100px;
@@ -118,6 +125,9 @@
   .profile-recipes-list {
       width: 100%;
   }
+  .profile-loader {
+    height: 50vh;
+  }
 }
 @media (max-width: 520px) {
   .profile {
@@ -128,5 +138,8 @@
   }
   .profile-bio {
       text-align: center;
+  }
+  .profile-loader {
+    height: 50vh;
   }
 }

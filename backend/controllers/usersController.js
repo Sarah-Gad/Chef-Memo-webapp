@@ -76,7 +76,9 @@ module.exports.deleteUserProfileCtrl = asyncHandler(async (req, res) => {
   if (publicIds?.length > 0) {
     await cloudinaryRemoveMultiImages(publicIds);
   }
-  await cloudinaryRemoveImage(user.profilePhoto.publicId);
+  if(user.profilePhoto.publicId !== null) {
+    await cloudinaryRemoveImage(user.profilePhoto.publicId);
+  }
   await Recipe.deleteMany({ chef: user._id });
   await Comment.deleteMany({ user: user._id });
   await User.findByIdAndDelete(req.params.id);

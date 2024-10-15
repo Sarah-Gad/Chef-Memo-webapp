@@ -1,18 +1,20 @@
 import "./profile.css";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import UpdateProfileModal from "./UpdateProfileModal";
 import swal from "sweetalert";
 import { toast } from "react-toastify";
-import { getUserProfile, uploadProfilePhoto } from "../../redux/apiCalls/profileApiCall";
+import { deleteProfile, getUserProfile, uploadProfilePhoto } from "../../redux/apiCalls/profileApiCall";
 import RecipeItem from "../../components/recipes/RecipeItem";
+import { logoutUser } from "../../redux/apiCalls/authApiCall";
+import { MoonLoader } from "react-spinners";
 
 const Profile = () => {
   const [updateProfile, setUpdateProfile] = useState(false);
   const [file, setFile] = useState(null);
   const dispatch = useDispatch();
-  const { profile } = useSelector(state => state.profile);
+  const { profile, loading, isProfileDeleted } = useSelector(state => state.profile);
   const { id } = useParams();
   const { user } = useSelector(state => state.auth);
 
@@ -20,6 +22,14 @@ const Profile = () => {
     dispatch(getUserProfile(id))
     window.scrollTo(0, 0);
   }, [id]);
+
+  const navigate = useNavigate();
+  useEffect(() => {
+    if(isProfileDeleted) {
+      navigate("/");
+    };
+    window.scrollTo(0,0);
+  }, [navigate, isProfileDeleted]);
 
   // Form Submit Handler
   const formSubmitHandler = (e) => {
@@ -40,14 +50,19 @@ const Profile = () => {
       dangerMode: true,
     }).then((willDelete) => {
       if (willDelete) {
-        swal("Account has been deleted!", {
-          icon: "success",
-        });
-      } else {
-        swal("Account deletion canceled")
-    };
+        dispatch(deleteProfile(user?._id));
+        dispatch(logoutUser())
+      };
     });
-  }
+  };
+
+  if(loading) {
+    return (
+      <div className="profile-loader" >
+        <MoonLoader />
+      </div>
+    )
+  };
 
   return (
     <section className="profile">
