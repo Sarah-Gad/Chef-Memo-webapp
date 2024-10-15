@@ -79,3 +79,50 @@ export function recipeLike(recipeId) {
         }
     }
 };
+
+export function updateRecipeImage(newImage, recipeId) {
+    return async (dispatch, getState) => {
+        try {
+            await request.put(`/api/recipes/update-image/${recipeId}`, newImage, {
+                headers: {
+                    Authorization: "Bearer " + getState().auth.user.token,
+                    "Content-Type" : "multipart/form-data",
+                }
+            });
+            toast.success("New recipe image updated successfully")
+        } catch (error) {
+            toast.error(error.response.data.message);
+        }
+    }
+};
+
+export function updateRecipe(newRecipe, recipeId) {
+    return async (dispatch, getState) => {
+        try {
+            const { data } = await request.put(`/api/recipes/${recipeId}`, newRecipe, {
+                headers: {
+                    Authorization: "Bearer " + getState().auth.user.token,
+                }
+            });
+            dispatch(recipeActions.setRecipe(data))
+        } catch (error) {
+            toast.error(error.response.data.message);
+        }
+    }
+};
+
+export function deleteRecipe(recipeId) {
+    return async (dispatch, getState) => {
+        try {
+            const { data } = await request.delete(`/api/recipes/${recipeId}`, {
+                headers: {
+                    Authorization: "Bearer " + getState().auth.user.token,
+                }
+            });
+            dispatch(recipeActions.deleteRecipe(data.recipeId));
+            toast.success(data.message);
+        } catch (error) {
+            toast.error(error.response.data.message);
+        }
+    }
+};

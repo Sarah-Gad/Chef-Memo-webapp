@@ -39,6 +39,9 @@ const recipeSlice = createSlice({
         setLike(state, action) {
             state.recipe.likes = action.payload.likes;
         },
+        deleteRecipe(state, action) {
+            state.recipes = state.recipes.filter(r => r._id !== action.payload);
+        },
     }
 });
 

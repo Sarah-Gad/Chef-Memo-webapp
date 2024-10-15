@@ -1,4 +1,4 @@
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { Heart } from 'lucide-react';
 import AddComment from "../../components/comments/AddComment";
@@ -8,7 +8,7 @@ import { toast } from "react-toastify";
 import swal from "sweetalert";
 import UpdateRecipeModal from "./UpdateRecipeModal";
 import { useDispatch, useSelector } from "react-redux";
-import { getRecipe, recipeLike } from "../../redux/apiCalls/recipeApiCall";
+import { deleteRecipe, getRecipe, recipeLike, updateRecipeImage } from "../../redux/apiCalls/recipeApiCall";
 
 const RecipeDetails = () => {
     const dispatch = useDispatch();
@@ -27,9 +27,11 @@ const RecipeDetails = () => {
     const updateImageSubmitHandler = (e) => {
     e.preventDefault();
     if(!file) return toast.error("There is no Image!");
-    console.log("image uploaded successfully")
+    const formData = new FormData();
+    formData.append("image", file);
+    dispatch(updateRecipeImage(formData, recipe?._id));
     }
-
+    const navigate = useNavigate();
     //Delete recipe Handler
     const deleterecipeHandler = () => {
       swal({
@@ -40,11 +42,8 @@ const RecipeDetails = () => {
         dangerMode: true,
     }).then((willDelete) => {
         if (willDelete) {
-            swal("Your recipe has been deleted!", {
-                icon: "success",
-            });
-        } else {
-            swal("Your recipe is safe!");
+            dispatch(deleteRecipe(recipe?._id));
+            navigate(`/profile/${user?._id}`);
         }
     });
 };

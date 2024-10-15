@@ -1,9 +1,11 @@
 import "./update-recipe.css";
 import { toast } from "react-toastify";
 import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { updateRecipe } from "../../redux/apiCalls/recipeApiCall";
 
 const UpdateRecipeModal = ( { setUpdaterecipe, recipe }) => {
-
+    const dispatch = useDispatch();
     const [title, setTitle] = useState(recipe.title);
     const [description, setDescription] = useState(recipe.description);
     const [ingredients, setIngredients] = useState(recipe.ingredients);
@@ -23,7 +25,8 @@ const UpdateRecipeModal = ( { setUpdaterecipe, recipe }) => {
     if (instructions.trim() === "")
         return toast.error("Recipe instructions are required");
     if (!cookTime) return toast.error("Recipe Cook Time is required");
-    console.log({ title, description, category, ingredients,instructions, cookTime });
+    dispatch(updateRecipe({ title, description, category, ingredients,instructions, cookTime }, recipe?._id));
+    setUpdaterecipe(false);
     };
 
     return (
