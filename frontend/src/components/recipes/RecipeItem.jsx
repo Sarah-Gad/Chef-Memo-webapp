@@ -1,7 +1,8 @@
 import { Link } from "react-router-dom";
 import "./recipes.css";
 
-const RecipeItem = ({ recipe }) => {
+const RecipeItem = ({ recipe, username, userId }) => {
+    const profileLink = userId ? `/profile/${userId}` : `/profile/${recipe?.chef._id}`;
     return (
         <div className="recipe-item">
             <div className="recipe-item-image-wrapper">
@@ -11,7 +12,7 @@ const RecipeItem = ({ recipe }) => {
                 <div className="recipe-item-info">
                     <div className="recipe-item-author">
                         <strong>Recipe by: </strong>
-                        <Link className="recipe-item-username" to={`/profile/${recipe?.chef?._id}`}>{recipe?.chef?.username}</Link>
+                        <Link className="recipe-item-username" to={profileLink}>{username ? username : recipe?.chef.username}</Link>
                     </div>
                     <div className="recipe-item-date">
                         {new Date(recipe?.createdAt).toDateString()}
