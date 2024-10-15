@@ -3,9 +3,33 @@
     padding: 20px;
 }
 .category-title {
-   margin-bottom: 15px;
-   color: var(--dark-color);
-   padding-bottom: 5px;
-   font-size: 30px;
-   width: max-content;
+    margin-bottom: 15px;
+    color: var(--dark-color);
+    padding-bottom: 5px;
+    font-size: 30px;
+    width: max-content;
+}
+.category-not-found {
+    font-size: 36px;
+    margin: 40px auto;
+    color: var(--dark-color);
+    text-align: center;
+    font-weight: 600;
+    line-height: 1.4;
+    max-width: 600px;
+    position: relative;
+}
+.category-not-found::after {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 4px;
+    background: var(--primary-color);
+    margin: 20px auto 0;
+    border-radius: 2px;
+}
+.category-not-found span {
+    color: var(--primary-color);
+    position: relative;
+    display: inline-block;
 }

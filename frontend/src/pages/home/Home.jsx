@@ -1,10 +1,20 @@
 import RcipeList from "../../components/recipes/RecipeList";
 import Sidebar from "../../components/sidebar/Sidebar";
 import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
 import "./home.css";
-import { recipes, categories } from "../../dummyData";
+import { categories } from "../../dummyData";
+import { fetchRecipes } from "../../redux/apiCalls/recipeApiCall";
 
 const Home = () => {
+  const dispatch = useDispatch();
+  const { recipes } = useSelector(state => state.recipe)
+
+  useEffect(() => {
+    dispatch(fetchRecipes(1))
+  }, []);
+
     return (
     <section className="home">
       <div className="home-hero-header">
@@ -14,7 +24,7 @@ const Home = () => {
       </div>
       <div className="home-latest-recipe">Latest Recipes</div>
       <div className="home-container">
-        <RcipeList recipes={recipes.slice(0, 3)} />
+        <RcipeList recipes={recipes} />
         <Sidebar categories={categories} />
       </div>
       <div className="home-see-recipes-link">
