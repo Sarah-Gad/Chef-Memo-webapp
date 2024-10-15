@@ -26,8 +26,6 @@ const RecipeItem = ({ recipe, username, userId }) => {
                 </div>
                 <p className="recipe-item-description" >
                     {recipe?.description}
-                    Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eius fuga, unde nesciunt ab saepe eligendi dicta id, aliquam doloremque at rerum aliquid numquam magnam excepturi distinctio blanditiis, ex obcaecati! Quod.
-                    Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eius fuga, unde nesciunt ab saepe eligendi dicta id, aliquam doloremque at rerum aliquid numquam magnam excepturi distinctio blanditiis, ex obcaecati! Quod.
                 </p>
                 <Link className="recipe-item-link" to={`/recipes/details/${recipe?._id}`} >
                     Read More...

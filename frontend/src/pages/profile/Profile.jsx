@@ -107,11 +107,13 @@ const Profile = () => {
       </div>
       <div className="profile-recipes-list">
       <h2 className="profile-recipes-list-title">Recipes of {profile?.username} </h2>
-      {
-          profile?.recipes.map(recipe =>
+      {profile?.recipes?.length > 0 ? (
+          profile.recipes.map(recipe => (
             <RecipeItem key={recipe._id} recipe={recipe} username={profile?.username} userId={profile?._id} />
-          )
-      }
+          ))
+        ) : (
+          <p className="no-recipes-message">No recipes have been added yet.</p>
+      )}
       </div>
       { user?._id === profile?._id && (
         <button onClick={deleteAccountHandler} className="delete-account-btn">

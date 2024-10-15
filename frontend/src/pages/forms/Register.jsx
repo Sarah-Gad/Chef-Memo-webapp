@@ -21,7 +21,7 @@ const Register = () => {
     if (password.trim() === "") return toast.error("Password is required");
     dispatch(registerUser({ username, email, password }))
   };
-  
+
   const navigate = useNavigate();
   if(registerMessage) {
     swal({
@@ -29,7 +29,7 @@ const Register = () => {
       icon: "success"
     }).then(isOk => {
       if(isOk) {
-        navigate("/login")
+        navigate("/login");
       }
     })
   };

@@ -17,6 +17,9 @@ const authSlice = createSlice({
         register(state, action) {
             state.registerMessage = action.payload;
         },
+        clearRegisterMessage(state) {
+            state.registerMessage = null;
+        },
         setUserPhoto(state, action) {
             state.user.profilePhoto = action.payload;
         },

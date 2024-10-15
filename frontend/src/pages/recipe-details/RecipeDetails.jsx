@@ -83,31 +83,13 @@ const RecipeDetails = () => {
                 </div>
             </div>
             <p className="recipe-details-description">
-                {recipe?.description} ... Lorem ipsum dolor sit amet consectetur
-                adipisicing elit. Incidunt quis a omnis aut sit earum atque eveniet
-                ratione sint animi illo id accusamus obcaecati dolore voluptatibus
-                aperiam qui, provident fuga? Lorem ipsum dolor sit amet consectetur,
-                adipisicing elit. Quibusdam neque odit soluta? Fugiat, dolores!
-                Laboriosam rem quod, explicabo similique aliquam unde sed vel
-                distinctio, fugiat ab aperiam odio nesciunt quas?
+                {recipe?.description}
             </p>
             <p className="recipe-details-ingredients">
-                {recipe?.ingredients} ... Lorem ipsum dolor sit amet consectetur
-                adipisicing elit. Incidunt quis a omnis aut sit earum atque eveniet
-                ratione sint animi illo id accusamus obcaecati dolore voluptatibus
-                aperiam qui, provident fuga? Lorem ipsum dolor sit amet consectetur,
-                adipisicing elit. Quibusdam neque odit soluta? Fugiat, dolores!
-                Laboriosam rem quod, explicabo similique aliquam unde sed vel
-                distinctio, fugiat ab aperiam odio nesciunt quas?
+                {recipe?.ingredients}
             </p>
             <p className="recipe-details-instructions">
-                {recipe?.instructions} ... Lorem ipsum dolor sit amet consectetur
-                adipisicing elit. Incidunt quis a omnis aut sit earum atque eveniet
-                ratione sint animi illo id accusamus obcaecati dolore voluptatibus
-                aperiam qui, provident fuga? Lorem ipsum dolor sit amet consectetur,
-                adipisicing elit. Quibusdam neque odit soluta? Fugiat, dolores!
-                Laboriosam rem quod, explicabo similique aliquam unde sed vel
-                distinctio, fugiat ab aperiam odio nesciunt quas?
+                {recipe?.instructions}
             </p>
             <div className="recipe-details-icon-wrapper">
                 <div className="recipe-likes">
