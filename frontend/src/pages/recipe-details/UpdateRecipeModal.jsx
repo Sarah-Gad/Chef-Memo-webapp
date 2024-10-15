@@ -1,11 +1,13 @@
 import "./update-recipe.css";
 import { toast } from "react-toastify";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { updateRecipe } from "../../redux/apiCalls/recipeApiCall";
+import { fetchCategories } from "../../redux/apiCalls/categoryApiCall";
 
 const UpdateRecipeModal = ( { setUpdaterecipe, recipe }) => {
     const dispatch = useDispatch();
+    const { categories } = useSelector(state => state.category);
     const [title, setTitle] = useState(recipe.title);
     const [description, setDescription] = useState(recipe.description);
     const [ingredients, setIngredients] = useState(recipe.ingredients);
@@ -28,6 +30,10 @@ const UpdateRecipeModal = ( { setUpdaterecipe, recipe }) => {
     dispatch(updateRecipe({ title, description, category, ingredients,instructions, cookTime }, recipe?._id));
     setUpdaterecipe(false);
     };
+
+    useEffect(() => {
+      dispatch(fetchCategories());
+    }, []);
 
     return (
     <div className="update-recipe">
@@ -53,9 +59,9 @@ const UpdateRecipeModal = ( { setUpdaterecipe, recipe }) => {
           <option disabled value="">
             Select A Category
           </option>
-          <option value="desserts">desserts</option>
-          <option value="main dishes">main dishes</option>
-          <option value="soups">soups</option>
+          {
+            categories.map(category => <option key={category._id} value={category.title}>{category.title}</option>)
+          }
         </select>
         <textarea
           className="update-recipe-textarea"

@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import "./home.css";
-import { categories } from "../../dummyData";
 import { fetchRecipes } from "../../redux/apiCalls/recipeApiCall";
 
 const Home = () => {
@@ -25,7 +24,7 @@ const Home = () => {
       <div className="home-latest-recipe">Latest Recipes</div>
       <div className="home-container">
         <RcipeList recipes={recipes} />
-        <Sidebar categories={categories} />
+        <Sidebar />
       </div>
       <div className="home-see-recipes-link">
         <Link className="home-link" to="/recipes">

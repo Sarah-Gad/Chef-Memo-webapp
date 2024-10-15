@@ -4,10 +4,12 @@ import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { createRecipe } from "../../redux/apiCalls/recipeApiCall";
+import { fetchCategories } from "../../redux/apiCalls/categoryApiCall";
 
 const CreateRecipe = () => {
     const dispatch = useDispatch();
     const { loading, isRecipeCreated } = useSelector(state => state.recipe);
+    const { categories } = useSelector(state => state.category);
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
     const [ingredients, setIngredients] = useState("");
@@ -47,6 +49,10 @@ const CreateRecipe = () => {
         window.scrollTo(0,0);
     }, [isRecipeCreated, navigate]);
 
+    useEffect(() => {
+        dispatch(fetchCategories());
+      }, []);
+
     return (
         <section className="create-recipe">
         <h1 className="create-recipe-title">Add Your Signature Dish</h1>
@@ -66,8 +72,7 @@ const CreateRecipe = () => {
             <option disabled value="">
                 Select A Category
             </option>
-            <option value="salads">salads</option>
-            <option value="beverages">beverages</option>
+            {categories.map(category => <option key={category._id} value={category.title}>{category.title}</option>)}
             </select>
             <textarea
             className="create-recipe-textarea"

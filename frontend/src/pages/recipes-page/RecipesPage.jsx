@@ -1,5 +1,4 @@
 import "./recipes-page.css";
-import { categories } from "../../dummyData";
 import { useEffect, useState } from "react";
 import RcipeList from "../../components/recipes/RecipeList";
 import Sidebar from "../../components/sidebar/Sidebar";
@@ -27,7 +26,7 @@ const RecipesPage = () => {
     <>
       <section className="recipes-page">
         <RcipeList recipes={recipes} />
-        <Sidebar categories={categories} />
+        <Sidebar />
       </section>
       <Pagination pages={pages} currentPage={currentPage} setCurrentPage={setCurrentPage} />
     </>
