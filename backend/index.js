@@ -9,8 +9,12 @@ const app = express();
 app.use(express.json());
 
 app.use(cors({
-  origin: "http://localhost:3000"
+  origin: "*"
 }));
+
+app.get('/', (req, res) => {
+  res.send('Welcome to Chef Memo API');
+});
 
 app.use('/api/auth', require('./routes/authRoute'));
 app.use('/api/users', require('./routes/usersRoute'));
