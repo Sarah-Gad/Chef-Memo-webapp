@@ -40,7 +40,6 @@
     font-size: 30px;
     font-weight: bold;
     color: var(--dark-color);
-    border-bottom: 2px solid var(--dark-color);
     width: max-content;
     margin-bottom: 20px;
 }
@@ -80,11 +79,11 @@
 /* Media Queries */
 @media (max-width: 990px) {
     .home-hero-header {
-        height: 180px; 
+        height: 180px;
         background-size: cover;
         background-position: center;
-        margin-bottom: 25px; 
-        border-radius: 18px; 
+        margin-bottom: 25px;
+        border-radius: 18px;
     }
 
     .home-hero-header-layout {
@@ -92,21 +91,21 @@
         right: 4px;
         left: 4px;
         bottom: 4px;
-        padding-bottom: 12px; 
-        border-radius: 14px; 
+        padding-bottom: 12px;
+        border-radius: 14px;
     }
 
     .home-title {
-        font-size: 24px; 
-        padding: 7px 12px; 
-        border-radius: 16px; 
+        font-size: 24px;
+        padding: 7px 12px;
+        border-radius: 16px;
         border-width: 2px;
     }
 
     .home-latest-recipe {
-        margin-left: 18px; 
-        font-size: 26px; 
-        margin-bottom: 18px; 
+        margin-left: 18px;
+        font-size: 26px;
+        margin-bottom: 18px;
     }
 
     .home-container {
@@ -116,24 +115,24 @@
     }
 
     .home-see-recipes-link {
-        padding: 0 18px; 
-        margin: 12px 0; 
+        padding: 0 18px;
+        margin: 12px 0;
     }
 
     .home-see-recipes-link .home-link {
-        padding: 9px; 
-        font-size: 18px; 
-        border-radius: 20px; 
+        padding: 9px;
+        font-size: 18px;
+        border-radius: 20px;
     }
 }
 
 @media (max-width: 520px) {
     .home-hero-header {
-        height: 100px; 
+        height: 100px;
         background-size: cover;
         background-position: center;
-        margin-bottom: 15px; 
-        border-radius: 12px; 
+        margin-bottom: 15px;
+        border-radius: 12px;
     }
 
     .home-hero-header-layout {
@@ -141,35 +140,35 @@
         right: 2px;
         left: 2px;
         bottom: 2px;
-        padding-bottom: 8px; 
-        border-radius: 10px; 
+        padding-bottom: 8px;
+        border-radius: 10px;
     }
 
     .home-title {
-        font-size: 14px; 
-        padding: 4px 6px; 
-        border-radius: 12px; 
+        font-size: 14px;
+        padding: 4px 6px;
+        border-radius: 12px;
         border-width: 1px;
     }
 
     .home-latest-recipe {
-        margin-left: 12px; 
-        font-size: 20px; 
-        margin-bottom: 12px; 
+        margin-left: 12px;
+        font-size: 20px;
+        margin-bottom: 12px;
     }
 
     .home-container {
-        padding: 0 8px; 
+        padding: 0 8px;
     }
 
     .home-see-recipes-link {
-        padding: 0 8px; 
-        margin: 6px 0; 
+        padding: 0 8px;
+        margin: 6px 0;
     }
 
     .home-see-recipes-link .home-link {
-        padding: 6px; 
-        font-size: 14px; 
-        border-radius: 18px; 
+        padding: 6px;
+        font-size: 14px;
+        border-radius: 18px;
     }
 }
