@@ -17,6 +17,7 @@ app.use('/api/users', require('./routes/usersRoute'));
 app.use('/api/recipes', require('./routes/recipeRoute'));
 app.use('/api/comments', require('./routes/commentRoute'));
 app.use('/api/categories', require('./routes/categoriesRoute'));
+app.use("/api/password", require("./routes/passwordRoute"));
 
 app.use(notFound);
 app.use(errorHandler);

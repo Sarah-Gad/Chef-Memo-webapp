@@ -28,7 +28,7 @@ module.exports.registerUserCtrl = asyncHandler(async (req, res) => {
     token: crypto.randomBytes(32).toString("hex"),
   });
   await verificationToken.save();
-  const link = `http://localhost:3000/users/${user._id}/verify/${verificationToken.token}`;
+  const link = `${process.env.CLIENT_DOMAIN}/users/${user._id}/verify/${verificationToken.token}`;
   const htmlTemplate = `
     <div style="max-width: 600px; margin: 0 auto; padding: 20px; font-family: Arial, sans-serif;">
       <h1 style="color: #DC7B79; text-align: center;">Welcome to Chef Memo Community!</h1>
@@ -77,7 +77,7 @@ module.exports.loginUserCtrl = asyncHandler(async (req, res) => {
       });
       await verificationToken.save();
     }
-    const link = `http://localhost:3000/users/${user._id}/verify/${verificationToken.token}`;
+    const link = `${process.env.CLIENT_DOMAIN}/users/${user._id}/verify/${verificationToken.token}`;
     const htmlTemplate = `
       <div style="max-width: 600px; margin: 0 auto; padding: 20px; font-family: Arial, sans-serif;">
         <h1 style="color: #DC7B79; text-align: center;">Welcome to Chef Memo Community!</h1>
