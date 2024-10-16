@@ -119,26 +119,36 @@ module.exports.updateRecipeImageCtrl = asyncHandler(async (req, res) => {
   if (!req.file) {
     return res.status(400).json({ message: 'No image provided' });
   }
+
   const recipe = await Recipe.findById(req.params.id);
   if (!recipe) {
     return res.status(404).json({ message: 'Recipe not found' });
   }
+
   if (req.user.id !== recipe.chef.toString()) {
     return res.status(403).json({ message: 'Access denied, you are not allowed' });
   }
-  await cloudinaryRemoveImage(recipe.image.publicId);
-  const imagePath = path.join(__dirname, `../images/${req.file.filename}`);
-  const result = await cloudinaryUploadImage(imagePath);
-  const updatedRecipe = await Recipe.findByIdAndUpdate(req.params.id, {
-    $set: {
-      image: {
-        url: result.secure_url,
-        publicId: result.public_id,
+
+  try {
+    if (recipe.image && recipe.image.publicId) {
+      await cloudinaryRemoveImage(recipe.image.publicId);
+    }
+
+    const result = await cloudinaryUploadImage(req.file);
+    const updatedRecipe = await Recipe.findByIdAndUpdate(req.params.id, {
+      $set: {
+        image: {
+          url: result.secure_url,
+          publicId: result.public_id,
+        },
       },
-    },
-  }, { new: true });
-  res.status(200).json(updatedRecipe);
-  fs.unlinkSync(imagePath);
+    }, { new: true });
+
+    res.status(200).json(updatedRecipe);
+  } catch (error) {
+    console.error('Error updating recipe image:', error);
+    res.status(500).json({ message: 'Error updating recipe image' });
+  }
 });
 
 module.exports.likeCtrl = asyncHandler(async (req, res) => {

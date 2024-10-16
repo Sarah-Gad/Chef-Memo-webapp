@@ -48,22 +48,26 @@ module.exports.profilePhotoUploadCtrl = asyncHandler(async (req, res) => {
   if (!req.file) {
     return res.status(400).json({ message: 'No file provided' });
   }
-  const imagePath = path.join(__dirname, `../images/${req.file.filename}`);
-  const result = await cloudinaryUploadImage(imagePath);
   const user = await User.findById(req.user.id);
   if (user.profilePhoto.publicId !== null) {
     await cloudinaryRemoveImage(user.profilePhoto.publicId);
   }
-  user.profilePhoto = {
-    url: result.secure_url,
-    publicId: result.public_id,
-  };
-  await user.save();
-  res.status(200).json({
-    message: 'Your profile photo uploaded successfully',
-    profilePhoto: { url: result.secure_url, publicId: result.public_id },
-  });
-  fs.unlinkSync(imagePath);
+  try {
+    const result = await cloudinaryUploadImage(req.file);
+    user.profilePhoto = {
+      url: result.secure_url,
+      publicId: result.public_id,
+    };
+    await user.save();
+
+    res.status(200).json({
+      message: 'Your profile photo uploaded successfully',
+      profilePhoto: { url: result.secure_url, publicId: result.public_id },
+    });
+  } catch (error) {
+    console.error('Error uploading profile photo:', error);
+    res.status(500).json({ message: 'Error uploading profile photo' });
+  }
 });
 
 module.exports.deleteUserProfileCtrl = asyncHandler(async (req, res) => {
