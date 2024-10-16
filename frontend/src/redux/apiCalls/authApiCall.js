@@ -32,3 +32,15 @@ export function registerUser(user) {
         }
     }
 };
+
+export function verifyEmail(userId,token) {
+    return async (dispatch) => {
+        try {
+            await request.get(`/api/auth/${userId}/verify/${token}`);
+            dispatch(authActions.setIsEmailVerified());
+            setTimeout(() => dispatch(authActions.clearRegisterMessage()), 2000);
+        } catch (error) {
+            console.log(error);
+        }
+    }
+}
