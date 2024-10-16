@@ -33,7 +33,7 @@ module.exports.sendResetPasswordLinkCtrl = asyncHandler(async (req, res) => {
         <a href="${link}" style="background-color: #E49795; color: #FFF8F8; padding: 12px 24px; text-decoration: none; border-radius: 5px; font-weight: bold;">Reset Password</a>
       </div>
       <p style="font-size: 16px; line-height: 1.5; color: #5C3130;">If you didn't request a password reset, please contact our support team immediately.</p>
-      <p style="font-size: 16px; line-height: 1.5; color: #5C3130;">Best regards,<br>The Chef Memo Team</p>
+      <p style="font-size: 16px; line-height: 1.5; color: #5C3130;">Best regards,<br>Chef Memo Team</p>
     </div>
   `;
   await sendEmail(user.email, "Reset Your Chef Memo Password", htmlTemplate);
@@ -83,6 +83,6 @@ module.exports.resetPasswordCtrl = asyncHandler(async (req,res) => {
   const hashedPassword = await bcrypt.hash(req.body.password, salt);
   user.password = hashedPassword;
   await user.save();
-  await verificationToken.remove();
+  await VerificationToken.deleteOne({ _id: verificationToken._id });
   res.status(200).json({ message: "Your password has been successfully reset. You can now log in with your new password." });
 });
