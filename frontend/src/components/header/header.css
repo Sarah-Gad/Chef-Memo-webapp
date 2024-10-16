@@ -62,18 +62,20 @@
     border-radius: 25px;
     padding: 8px 15px;
     align-items: center;
-}
-.header-right-link:hover {
-    transition: background-color 0.3s ease, transform 0.3s ease;
     display: inline-flex;
 }
 .header-right-link:hover {
+    transition: background-color 0.3s ease, transform 0.3s ease;
     background-color: var(--gray-color);
     transform: translateY(-2px);
 }
+
 .header-right-link svg {
     margin-right: 5px;
     vertical-align: middle;
+}
+.header-right-link-text {
+    display: inline;
 }
 .header-right-user-info {
     display: flex;
@@ -160,26 +162,52 @@
 @media (max-width: 520px) {
     .header {
         padding: 0 10px;
+        height: 50px; 
+        justify-content: center;
     }
     .header-logo {
-        font-size: 20px;
+        font-size: 18px; 
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
     }
     .header-logo .chefhatlogo {
-        width: 20px;
-        height: 20px;
+        width: 18px; 
+        height: 18px;
     }
     .header-right-link {
-        font-size: 11px;
-        padding: 5px 7px;
-    }
-    .header-menu {
-        margin-right: 5px;
-        width: 32px;
-        height: 32px;
-        padding: 4px;
+        font-size: 0;
+        padding: 5px; 
+        width: 24px; 
+        height: 24px; 
         display: flex;
         align-items: center;
         justify-content: center;
+        margin-left: 5px;
+    }
+    .header-right-link svg {
+        margin-right: 0;
+        width: 14px; 
+        height: 14px;
+    }
+    .header-right-link-text {
+        display: none;
+    }
+    .header-menu {
         margin-right: 5px;
+        width: 24px; 
+        height: 24px;
+        padding: 3px; 
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: absolute;
+        left: 10px;
+    }
+    .header-right {
+        position: absolute;
+        right: 10px;
+        display: flex;
+        align-items: center;
     }
 }
