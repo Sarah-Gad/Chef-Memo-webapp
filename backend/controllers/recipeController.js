@@ -106,7 +106,7 @@ module.exports.updateRecipeCtrl = asyncHandler(async (req, res) => {
       cookTime: req.body.cookTime,
       category: req.body.category,
     },
-  }, { new: true }).populate('chef', ['-password']);
+  }, { new: true }).populate('chef', ['-password']).populate("comments");
   res.status(200).json(updatedRecipe);
 });
 

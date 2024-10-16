@@ -4,7 +4,7 @@
   "description": "backend of chefmemo application",
   "main": "app.js",
   "scripts": {
-    "dev": "nodemon app"
+    "dev": "nodemon index.js"
   },
   "repository": {
     "type": "git",
