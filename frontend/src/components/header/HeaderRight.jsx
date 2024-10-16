@@ -14,30 +14,35 @@ const HeaderRight = () => {
         dispatch(logoutUser());
     }
 
+    const toggleDropdown = () => setDropdown(prev => !prev);
+
     return (
         <div className="header-right">
             {user ?
             <>
             <div className="header-right-user-info">
-                <span onClick={() => setDropdown(prev => !prev)} className="header-right-username">
+                <span onClick={toggleDropdown} className="header-right-username">
                     {user?.username}
                 </span>
-                <img src={user?.profilePhoto.url}
-                alt="user photo"
-                className="header-right-user-photo"
+                <img
+                    src={user?.profilePhoto.url}
+                    alt="user photo"
+                    className="header-right-user-photo"
+                    onClick={toggleDropdown}
+                    style={{ cursor: 'pointer' }}
                 />
                 {dropdown && (
                     <div className="header-right-dropdown">
-                    <Link  onClick={() => setDropdown(false)} to={`/profile/${user?._id}`} className="header-dropdown-item" >
-                    <i className="bi bi-file-person"></i>
-                    <span>Profile</span>
-                    </Link>
-                    <div onClick={logoutHandler} className="header-dropdown-item">
-                        <i className="bi bi-box-arrow-in-left">
-                            <span>Logout</span>
-                        </i>
+                        <Link onClick={() => setDropdown(false)} to={`/profile/${user?._id}`} className="header-dropdown-item">
+                            <i className="bi bi-file-person"></i>
+                            <span>Profile</span>
+                        </Link>
+                        <div onClick={logoutHandler} className="header-dropdown-item">
+                            <i className="bi bi-box-arrow-in-left">
+                                <span>Logout</span>
+                            </i>
+                        </div>
                     </div>
-                </div>
                 )}
             </div>
             </> : (
@@ -53,8 +58,8 @@ const HeaderRight = () => {
                 </>
             )
             }
-            </div>
-        );
-    }
+        </div>
+    );
+}
 
 export default HeaderRight;

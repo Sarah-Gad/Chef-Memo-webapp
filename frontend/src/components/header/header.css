@@ -203,6 +203,20 @@
         display: flex;
         align-items: center;
     }
+
+    .header-right-user-info {
+        display: flex;
+        align-items: center;
+    }
+    .header-right-username {
+        font-size: 16px;
+        margin-right: 6px;
+    }
+    .header-right-user-photo {
+        width: 36px;
+        height: 36px;
+        border-width: 1px;
+    }
 }
 @media (max-width: 520px) {
     .header {
@@ -254,5 +268,17 @@
         right: 10px;
         display: flex;
         align-items: center;
+    }
+    .header-right-user-info {
+        display: flex;
+        align-items: center;
+    }
+    .header-right-username {
+        display: none;
+    }
+    .header-right-user-photo {
+        width: 32px;
+        height: 32px;
+        border-width: 1px;
     }
 }
